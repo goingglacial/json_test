@@ -1,40 +1,19 @@
+#!/usr/bin/env python
+
 import json
 from collections import Counter
 
-data_string = open('fake_peeps.json', 'r').read()
-print data_string
+people_list = json.load(open('fake_peeps.json', 'r'))
 
-data_decoded = json.loads(data_string)
-print data_decoded
+ages = [p['age'] for p in people_list]
 
-data_encoded = json.dumps(data_decoded)
-print data_encoded
+average_age = sum(ages) / len(ages)
+print "The average age of folks in this motley crew is " + str(average_age) + "."
 
-print data_decoded
+genders = [p['gender'] for p in people_list]
 
-# use data_decoded to find average age of folks
-# in test json file
-age_list = [dictionary["age"] for dictionary in data_decoded]
-average_age = sum(age_list) / len(age_list)
-# print average_age
-print "The average age of fake folks is " + str(average_age) + "."
+num_females = genders.count('female')
+print "There are " + str(num_females) + " chicks in this group."
 
-# calculate total number of people in json test file
-count = 0
-for dictionary["gender"] in data_decoded:
-    count = count + 1
-# print count
-print "There are " + str(count) + " people in this motley crew."
-
-# calculate totals for women and men in json test file
-gender_list = [dictionary["gender"] for dictionary in data_decoded]
-print gender_list
-
-num_females = gender_list.count("female")
-print num_females
-
-num_males = gender_list.count("male")
-print num_males
-
-
-
+num_males = genders.count('male')
+print "There are " + str(num_males) + " dudes in this group."
